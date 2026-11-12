@@ -620,8 +620,8 @@
 
   function setupVideoModule() {
     let info = bookData.globalInfo || {};
-    let lName = info.lessonName || info.globalLessonName || 'പഠന വീഡിയോ';
-    document.getElementById('vidTitle').innerText = `പാഠം: ${lName}`;
+    let curL = getCurrentLesson();
+    document.getElementById('vidTitle').innerText = (curL !== Infinity) ? `പാഠം ${curL}` : `പാഠം: ${info.lessonName || info.globalLessonName || 'പഠന വീഡിയോ'}`;
     document.getElementById('vidSubTitle').innerText = `വിഷയം: ${info.subject || 'N/A'} | ക്ലാസ്: ${info.class || 'N/A'}`;
 
     let ytLink = getVideoLink();
