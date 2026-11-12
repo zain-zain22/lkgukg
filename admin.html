@@ -91,20 +91,7 @@ audio { margin-top: 5px; display: none; width: 100%; }
     <div><label>ക്ലാസ് (Class):</label><input type="text" id="globalClass" placeholder="Class 4"></div>
     <div><label>വിഷയം (Subject):</label><input type="text" id="globalSubject" placeholder="ഫിഖ്ഹ്"></div>
 </div>
-<div class="grid-2">
-    <div><label>പാർട്ട് (Part):</label><input type="text" id="globalPart" placeholder="Part 1"></div>
-    <div><label>ചാപ്റ്റർ (Chapter):</label><input type="text" id="globalChapter" placeholder="Chapter 2"></div>
-</div>
-<label>പാഠത്തിന്റെ പേര് (Lesson Name):</label>
-<input type="text" id="globalLessonName" placeholder="വുളൂഅ്">
-
-<label style="margin-top: 10px; display: block;">യൂട്യൂബ് വീഡിയോ ലിങ്ക് (YouTube Link):</label>
-<input type="text" id="globalYoutubeLink" placeholder="https://www.youtube.com/watch?v=xxxxx">
-
-<label style="margin-top: 10px; display: block;">പാഠം തിരിച്ചുള്ള വീഡിയോ ലിങ്കുകൾ (ഓപ്ഷണൽ - LKG, ഒന്നാം ക്ലാസ്സിന്):</label>
-<p style="font-size:11px; color:#555; margin:0 0 4px 0;">ഓരോ വരിയിലും: പാഠം നമ്പർ | ലിങ്ക്. ഏറ്റവും വലിയ പാഠം നമ്പറിൻ്റെ വീഡിയോ ആണ് കുട്ടിക്ക് കാണിക്കുക. ഒന്നും നൽകിയില്ലെങ്കിൽ മുകളിലെ പൊതു ലിങ്ക് ഉപയോഗിക്കും.</p>
-<textarea id="lessonVideosInput" style="min-height:80px; font-size:13px;" placeholder="1 | https://youtu.be/xxxxxxxxxxx
-2 | https://youtu.be/yyyyyyyyyyy"></textarea>
+<label>പാർട്ട് (Part):</label><input type="text" id="globalPart" placeholder="Part 1">
 </div>
 </div> 
 
@@ -166,7 +153,10 @@ audio { margin-top: 5px; display: none; width: 100%; }
 <div id="mappingSection" style="display:none;"> 
 <div style="background: #e8f4fd; padding: 10px; border-radius: 4px; margin-bottom: 10px; border: 1px solid #bce0fd;"> 
 <label style="font-weight: bold; color: #2980b9;">📚 ഈ പേജ് ഏത് പാഠത്തിന്റെ ഭാഗമാണ്? (Lesson Number):</label> 
-<input type="number" id="lessonNum" value="1" min="1"> 
+<input type="number" id="lessonNum" value="1" min="1" oninput="fillLessonVideoLink()"> 
+<label style="font-weight: bold; color: #c0392b; margin-top:8px; display:block;">🎥 ഈ പാഠത്തിന്റെ യൂട്യൂബ് ലിങ്ക് (YouTube Link):</label>
+<input type="text" id="lessonVideoLink" placeholder="https://youtu.be/xxxxxxxxxxx">
+<p style="font-size:11px; color:#555; margin:2px 0 0 0;">ഒരു പാഠത്തിന് ഒരു ലിങ്ക് മതി. അതേ പാഠത്തിൻ്റെ മറ്റ് പേജുകൾ ചേർക്കുമ്പോൾ ഇത് തനിയെ വരും.</p>
 </div> 
 <div style="font-size: 11px; color: #2c3e50; font-weight: bold; text-align: left; margin-bottom: 3px;">📖 ഒരു വാക്കിനുള്ള വര ചിത്രത്തിൽ വരയ്ക്കുക, പിന്നെ ആ വാക്ക് എഴുതി "ലിങ്ക് ചെയ്യുക" അമർത്തുക (🔵 നീല = ബന്ധിപ്പിക്കാത്തത്, 🟢 പച്ച + നമ്പർ = വാക്കിനോട് ബന്ധിപ്പിച്ചത്):</div> 
 <div class="image-container" id="imageContainer" style="width:100%;"> 
@@ -456,6 +446,20 @@ async function saveWorkPDF(){
     document.getElementById("pdfStatus").innerHTML= "✅ PDF വിജയകരമായി അപ്‌ലോഡ് ചെയ്തു";
 }
 
+let lessonVideoMap = {};
+
+function fillLessonVideoLink() {
+    let n = parseInt(document.getElementById('lessonNum').value);
+    document.getElementById('lessonVideoLink').value = (n && lessonVideoMap[n]) ? lessonVideoMap[n] : '';
+}
+
+function buildLessonVideos() {
+    let lessons = {};
+    allPagesMemory.forEach(p => { lessons[p.lesson || 1] = true; });
+    return Object.keys(lessonVideoMap).map(Number).filter(n => lessons[n] && lessonVideoMap[n]).sort((x, y) => x - y)
+        .map(n => ({ lesson: n, link: lessonVideoMap[n] }));
+}
+
 function parseLessonVideos() {
     let out = [];
     document.getElementById('lessonVideosInput').value.split('\n').forEach(line => {
@@ -485,10 +489,9 @@ async function loadOldDataFromGitHub() {
                 document.getElementById('globalClass').value = oldBook.globalInfo.class || '';
                 document.getElementById('globalSubject').value = oldBook.globalInfo.subject || '';
                 document.getElementById('globalPart').value = oldBook.globalInfo.part || '';
-                document.getElementById('globalChapter').value = oldBook.globalInfo.chapter || '';
-                document.getElementById('globalLessonName').value = oldBook.globalInfo.lessonName || '';
-                document.getElementById('globalYoutubeLink').value = oldBook.globalInfo.youtubeLink || '';
-                document.getElementById('lessonVideosInput').value = (oldBook.globalInfo.lessonVideos || []).map(v => v.lesson + ' | ' + v.link).join('\n');
+                lessonVideoMap = {};
+                (oldBook.globalInfo.lessonVideos || []).forEach(v => { if(v && v.lesson > 0 && v.link) lessonVideoMap[v.lesson] = v.link; });
+                fillLessonVideoLink();
             }
             if(oldBook && Array.isArray(oldBook.pages)) allPagesMemory = oldBook.pages.map(page => ({ ...page, isNewPage: false })); 
         } 
@@ -622,7 +625,7 @@ function renderExistingPagesList() {
         container.appendChild(div); 
     }); 
     document.getElementById('pageNumberBadge').innerText = `ആകെ പേജുകൾ: ${allPagesMemory.length}`; 
-    if(allPagesMemory.length > 0 && editingPageIndex === null) document.getElementById('lessonNum').value = allPagesMemory[allPagesMemory.length - 1].lesson || 1; 
+    if(allPagesMemory.length > 0 && editingPageIndex === null) document.getElementById('lessonNum').value = allPagesMemory[allPagesMemory.length - 1].lesson || 1; fillLessonVideoLink(); 
 } 
 
 function movePageUp(index) {
@@ -645,7 +648,7 @@ function editPageFromList(index) {
     editingPageIndex = index;
     let page = allPagesMemory[index];
     document.getElementById('mappingSection').style.display = 'block';
-    document.getElementById('lessonNum').value = page.lesson || 1;
+    document.getElementById('lessonNum').value = page.lesson || 1; fillLessonVideoLink();
     document.getElementById('bookImg').src = page.image || '';
     
     currentZones = JSON.parse(JSON.stringify(page.zones));
@@ -1116,6 +1119,9 @@ function saveWordZone() {
 function addNextPageToMemory() { 
     let lesson = parseInt(document.getElementById('lessonNum').value); 
     if(!lesson || lesson < 1) return alert("പാഠം നമ്പർ നൽകുക!"); 
+    let vLink = document.getElementById('lessonVideoLink').value.trim();
+    if(vLink && !/(?:[?&]v=|youtu\.be\/|embed\/|shorts\/|live\/)([A-Za-z0-9_-]{11})/.test(vLink)) return alert("യൂട്യൂബ് ലിങ്ക് ശരിയല്ല. ലിങ്ക് ഒന്നുകൂടി പരിശോധിക്കുക.");
+    if(vLink) lessonVideoMap[lesson] = vLink; else delete lessonVideoMap[lesson];
 
     if(readingPaths.length > 0 && !confirm("വരച്ച ചില വരകൾ ഒരു വാക്കിനും നൽകിയിട്ടില്ല. അവ ഒഴിവാക്കി സേവ് ചെയ്യണോ?")) return;
     if(editingPageIndex !== null) {
@@ -1511,10 +1517,7 @@ async function publishToGitHubDirectly() {
         class: document.getElementById('globalClass').value.trim(), 
         subject: document.getElementById('globalSubject').value.trim(), 
         part: document.getElementById('globalPart').value.trim(), 
-        chapter: document.getElementById('globalChapter').value.trim(), 
-        lessonName: document.getElementById('globalLessonName').value.trim(), 
-        youtubeLink: document.getElementById('globalYoutubeLink').value.trim(),
-          lessonVideos: parseLessonVideos() 
+        lessonVideos: buildLessonVideos() 
     }; 
 
     try { 
