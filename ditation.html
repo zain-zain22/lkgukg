@@ -1,0 +1,500 @@
+<!DOCTYPE html> 
+<html lang="ml"> 
+<head> 
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+<title>സൗണ്ട് ബുക്ക് - കേട്ടെഴുത്ത് പാനൽ</title> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style> 
+*, *::before, *::after { box-sizing: border-box; } 
+body { 
+    font-family: 'Segoe UI', system-ui, sans-serif; 
+    background: #111827; 
+    color: #f3f4f6; 
+    margin: 0; 
+    padding: 0; 
+    display: block; 
+    text-align: center; 
+} 
+.container { 
+    max-width: 800px; 
+    margin: 0 auto; 
+    padding: 20px; 
+    min-height: 100vh; 
+} 
+h1 { 
+    color: #38bdf8; 
+    font-size: 28px; 
+    margin-top: 10px; 
+    margin-bottom: 5px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5); 
+} 
+.lesson-info-badge {
+    background: #1f2937;
+    color: #f59e0b;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 15px;
+    border: 1px solid #374151;
+}
+.setup-box { 
+    background: #1f2937; 
+    padding: 30px; 
+    border-radius: 12px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4); 
+    margin-top: 20px; 
+    text-align: center; 
+    border: 1px solid #374151; 
+} 
+.setup-box h3 { 
+    text-align: center; 
+    color: #f3f4f6; 
+    margin-top: 0; 
+} 
+.setup-box p { color: #9ca3af; font-size: 15px; margin: 0 0 18px 0; }
+button { 
+    background: #0284c7; 
+    color: white; 
+    border: none; 
+    padding: 14px 20px; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    font-size: 16px; 
+    width: 100%; 
+    transition: background 0.2s; 
+} 
+button:hover { background: #0369a1; } 
+.switch-link { display: inline-block; margin-top: 18px; color: #38bdf8; font-size: 14px; text-decoration: none; }
+
+/* എക്സാം സ്ക്രീൻ സ്റ്റൈലുകൾ */
+.exam-card { 
+    background: #1f2937; 
+    border-radius: 16px; 
+    padding: 40px 20px; 
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5); 
+    margin-top: 10px; 
+    border: 1px solid #374151; 
+} 
+.word-badge { 
+    background: #374151; 
+    color: #38bdf8; 
+    padding: 6px 16px; 
+    border-radius: 20px; 
+    font-size: 18px; 
+    font-weight: bold; 
+    display: inline-block; 
+    margin-bottom: 20px; 
+} 
+.instruction { 
+    font-size: 24px; 
+    color: #e5e7eb; 
+    margin-bottom: 30px; 
+} 
+
+/* വൃത്താകൃതിയിലുള്ള വലിയ ടൈമർ */
+.timer-container { 
+    position: relative; 
+    width: 180px; 
+    height: 180px; 
+    margin: 0 auto 30px auto; 
+} 
+.timer-svg { 
+    transform: rotate(-90deg); 
+    width: 180px; 
+    height: 180px; 
+} 
+.timer-svg circle { 
+    stroke-width: 10px; 
+    fill: transparent; 
+} 
+.timer-bg { stroke: #374151; } 
+.timer-progress { 
+    stroke: #ef4444; 
+    stroke-dasharray: 502; 
+    stroke-dashoffset: 0; 
+    stroke-linecap: round; 
+    transition: stroke-dashoffset 1s linear; 
+} 
+.timer-text { 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    font-size: 55px; 
+    font-weight: bold; 
+    color: #ef4444; 
+} 
+
+/* ഉത്തരം വെളിപ്പെടുത്തുന്ന പാനൽ */
+.answer-panel { 
+    margin-top: 30px; 
+    border-top: 3px dashed #4b5563; 
+    padding-top: 30px; 
+    animation: zoomIn 0.4s ease-out; 
+} 
+.ans-label { 
+    font-size: 18px; 
+    color: #f59e0b; 
+    font-weight: bold; 
+    margin-bottom: 15px; 
+} 
+.ans-malayalam { 
+    font-size: 55px; 
+    font-weight: bold; 
+    color: #ffffff; 
+    margin-bottom: 15px; 
+} 
+.ans-arabic { 
+    font-size: 85px; 
+    font-weight: bold; 
+    color: #10b981; 
+    font-family: 'Amiri', 'Traditional Arabic', serif; 
+    direction: rtl; 
+    margin-bottom: 15px; 
+} 
+.hw-display-svg { 
+    width: 100%; 
+    max-width: 450px; 
+    height: 320px; 
+    border: 2px solid #4b5563; 
+    background: #111827; 
+    border-radius: 8px; 
+    margin: 15px auto; 
+    display: block; 
+} 
+
+.loading-overlay { 
+    display: none; 
+    position: fixed; 
+    top: 0; left: 0; width: 100%; height: 100%; 
+    background: rgba(17,24,39,0.9); 
+    color: white; 
+    justify-content: center; 
+    align-items: center; 
+    font-size: 22px; 
+    font-weight: bold; 
+    z-index: 9999; 
+} 
+.control-btns { 
+    display: flex; 
+    gap: 10px; 
+    max-width: 300px; 
+    margin: 20px auto 0 auto; 
+} 
+.btn-secondary { background: #4b5563; } 
+.btn-secondary:hover { background: #374151; }
+
+.toast-msg {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ef4444;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    display: none;
+    z-index: 10000;
+}
+
+@keyframes zoomIn { 
+    from { opacity: 0; transform: scale(0.95); } 
+    to { opacity: 1; transform: scale(1); } 
+} 
+</style> 
+</head> 
+<body> 
+
+<div class="loading-overlay" id="loadingOverlay"> 
+    <div><i class="fa-solid fa-spinner fa-spin" style="margin-bottom:10px; font-size:40px; color:#38bdf8;"></i><br><span id="loadText">📦 വാക്കുകൾ ശേഖരിക്കുന്നു...</span></div> 
+</div> 
+
+<div class="container"> 
+    <h1>🎤 സൗണ്ട് ബുക്ക് - കേട്ടെഴുത്ത് റൂം</h1> 
+    <div class="lesson-info-badge" id="lessonInfoTag" style="display:none;">-</div>
+
+    <div class="setup-box" id="setupBox"> 
+        <h3>✍️ കേട്ടെഴുത്ത്</h3> 
+        <p>ഏറ്റവും പുതിയ വാക്കുകൾ ആദ്യം, ഓരോ വാക്കിനും 60 സെക്കൻഡ്.</p>
+        <button onclick="fetchWordsFromAdmin()">🚀 വാക്കുകൾ ലോഡ് ചെയ്ത് തുടങ്ങുക</button> 
+        <a class="switch-link" href="projector_lkg.html">➡️ ശരിയായ വാക്ക് തിരഞ്ഞെടുക്കൽ പാനലിലേക്ക് പോകുക</a>
+    </div> 
+
+    <div id="examBox" style="display: none;"> 
+        <div class="exam-card"> 
+            <div class="word-badge" id="wordIndexTitle">വാക്ക് 1 / 25</div> 
+            <div class="instruction" id="examStatusText">✍️ വോയ്സ് ശ്രദ്ധിച്ചു ബുക്കിലേക്ക് എഴുതുക...</div> 
+
+            <div class="timer-container" id="timerSection"> 
+                <svg class="timer-svg"> 
+                    <circle class="timer-bg" cx="90" cy="90" r="80"></circle> 
+                    <circle class="timer-progress" id="timerProgressCircle" cx="90" cy="90" r="80"></circle> 
+                </svg> 
+                <div class="timer-text" id="countdownText">60</div> 
+            </div> 
+
+            <div class="answer-panel" id="answerPanel" style="display: none;"> 
+                <div class="ans-label">📢 ശരിയായ ഉത്തരം:</div> 
+                <div class="ans-malayalam" id="ansMal"></div> 
+                <div class="ans-arabic" id="ansArbi"></div> 
+                <svg class="hw-display-svg" id="ansHwSvg" viewBox="0 0 700 700" preserveAspectRatio="xMidYMid meet" style="display:none;"></svg> 
+            </div> 
+        </div> 
+
+        <div class="control-btns"> 
+            <button class="btn-secondary" onclick="replayCurrentAudio()">🔊 വീണ്ടും കേൾക്കുക</button> 
+            <button class="btn-secondary" style="background:#ef4444;" onclick="exitExamMode()">🛑 നിർത്തുക</button> 
+        </div> 
+    </div> 
+</div> 
+
+<div id="toast" class="toast-msg"></div>
+
+<script> 
+// സൈറ്റ് github.io-ൽ ആണെങ്കിൽ അതേ സൈറ്റിലെ ഫയലുകൾ നേരിട്ട് ഉപയോഗിക്കുന്നു (റെപ്പോ പേര് മാറ്റേണ്ടതില്ല).
+// ഫയൽ നേരിട്ട് തുറന്നാൽ മാത്രം താഴെയുള്ള GitHub raw ലിങ്ക് ഉപയോഗിക്കും.
+const pathSegments = window.location.pathname.split('/').filter(Boolean);
+const ON_GH_PAGES = window.location.hostname.includes('github.io');
+const GH_USER = ON_GH_PAGES ? window.location.hostname.split('.')[0] : "zain-zain22";
+const GH_REPO = (ON_GH_PAGES && pathSegments.length > 0) ? pathSegments[0] : "lkgukg";
+const BASE_URL = ON_GH_PAGES ? "" : `https://raw.githubusercontent.com/${GH_USER}/${GH_REPO}/main/`;
+const MAX_WORDS = 25;   // ഏറ്റവും പുതിയ 25 വാക്കുകൾ
+
+let wordsDatabase = []; 
+let currentIdx = 0; 
+let countdownValue = 60; 
+let countdownTimer = null; 
+let audioLoopTimer = null; 
+let nextWordTimer = null;
+let animToken = 0;   // ഓരോ ആനിമേഷനും തിരിച്ചറിയാൻ (നിർത്തുമ്പോൾ/അടുത്ത വാക്കിൽ പഴയത് നിർത്താൻ)
+let dictationAudio = new Audio(); 
+
+function showToast(msg) {
+    let t = document.getElementById("toast");
+    t.textContent = msg;
+    t.style.display = "block";
+    setTimeout(() => { t.style.display = "none"; }, 3000);
+}
+
+async function fetchJsonSafe(path, fallback) {
+    try {
+        let res = await fetch(BASE_URL + path + '?t=' + Date.now());
+        if(!res.ok && BASE_URL !== "") res = await fetch(path + '?t=' + Date.now());
+        if(res.ok) return await res.json();
+    } catch(e) { }
+    return fallback;
+}
+
+async function fetchWordsFromAdmin() { 
+    document.getElementById('loadingOverlay').style.display = 'flex'; 
+    try { 
+        let book = await fetchJsonSafe('data/data_book.json', {});
+
+        // പാഠപുസ്തകത്തിൽ ടെക്സ്റ്റും ശബ്ദവും നൽകിയ വാക്കുകൾ (ചേർത്ത ക്രമത്തിൽ)
+        let words = [];
+        (book.pages || []).filter(p => !p.hidden).forEach(p => {
+            (p.zones || []).forEach(z => {
+                let t = (z.text || '').trim();
+                if(t && z.audioSrc) words.push({ arbiText: t, audio: z.audioSrc, writingPaths: z.writingPaths || null, mal: '' });
+            });
+        });
+
+        // പാഠപുസ്തക വാക്കുകൾ ഇല്ലെങ്കിൽ പഴയ വേർഡ് ആപ്പ് ഡാറ്റ ഉപയോഗിക്കുന്നു
+        if(words.length === 0) {
+            let old = await fetchJsonSafe('data/data.json', {});
+            if(Array.isArray(old.words)) words = old.words.filter(w => !w.hidden && !w.isHidden);
+        }
+
+        let info = book.globalInfo || {};
+        let tagParts = [info.class, info.subject, info.part].filter(x => x && String(x).trim());
+        let tagElem = document.getElementById('lessonInfoTag');
+        if(tagParts.length > 0) { tagElem.innerText = '📚 ' + tagParts.join(' | '); tagElem.style.display = 'inline-block'; }
+
+        // ഏറ്റവും അവസാനം ചേർത്ത 25 വാക്കുകൾ, പുതിയത് ആദ്യം
+        wordsDatabase = words.slice(-MAX_WORDS).reverse();
+
+        document.getElementById('loadingOverlay').style.display = 'none'; 
+        if(wordsDatabase.length === 0) { 
+            alert("വാക്കുകൾ കണ്ടെത്തിയില്ല! admin പാനലിൽ പാഠപുസ്തകത്തിൽ വാക്കുകൾ വരച്ച് ടെക്സ്റ്റും ശബ്ദവും നൽകി പബ്ലിഷ് ചെയ്യുക."); 
+            return; 
+        } 
+
+        document.getElementById('setupBox').style.display = 'none'; 
+        document.getElementById('examBox').style.display = 'block'; 
+        currentIdx = 0; 
+        loadNextDictationWord(); 
+    } catch(err) { 
+        alert("ഡാറ്റ ലോഡ് ചെയ്യുന്നതിൽ പരാജയം: " + err.message); 
+        document.getElementById('loadingOverlay').style.display = 'none'; 
+    } 
+} 
+
+function loadNextDictationWord() { 
+    if(currentIdx >= wordsDatabase.length) { 
+        alert("🎉 കേട്ടെഴുത്ത് വിജയകരമായി അവസാനിച്ചു!"); 
+        exitExamMode(); 
+        return; 
+    } 
+
+    animToken++;
+    let currentWord = wordsDatabase[currentIdx]; 
+    document.getElementById('wordIndexTitle').innerText = `വാക്ക് ${currentIdx + 1} / ${wordsDatabase.length}`; 
+    document.getElementById('examStatusText').innerText = "✍️ വോയ്സ് ശ്രദ്ധിച്ചു ബുക്കിലേക്ക് എഴുതുക..."; 
+    document.getElementById('answerPanel').style.display = 'none'; 
+    document.getElementById('ansHwSvg').style.display = 'none'; 
+    document.getElementById('timerSection').style.display = 'block'; 
+
+    countdownValue = 60; 
+    document.getElementById('countdownText').innerText = countdownValue; 
+    updateTimerCircle(60); 
+
+    playWordVoice(currentWord.audio); 
+
+    // 1 മിനിറ്റ് തീരുന്നത് വരെ ഓരോ 4.5 സെക്കൻഡിലും ഒരേ വാക്ക് ആവർത്തിച്ചു പ്ലേ ചെയ്യുന്നു
+    if(audioLoopTimer) clearInterval(audioLoopTimer); 
+    audioLoopTimer = setInterval(() => { 
+        playWordVoice(currentWord.audio); 
+    }, 4500); 
+
+    if(countdownTimer) clearInterval(countdownTimer); 
+    countdownTimer = setInterval(() => { 
+        countdownValue--; 
+        document.getElementById('countdownText').innerText = countdownValue; 
+        updateTimerCircle(countdownValue); 
+
+        if(countdownValue <= 0) { 
+            clearInterval(countdownTimer); 
+            clearInterval(audioLoopTimer); 
+            revealWordAnswer(currentWord); 
+        } 
+    }, 1000); 
+} 
+
+function playWordVoice(audioName) { 
+    if(!audioName) {
+        showToast("ഈ വാക്കിന് ശബ്ദം നൽകിയിട്ടില്ല.");
+        return; 
+    }
+    let cleanAudioName = audioName.trim();
+    let audioPath = cleanAudioName.startsWith('http') ? cleanAudioName
+        : BASE_URL + (cleanAudioName.startsWith('data/') ? cleanAudioName : `data/${cleanAudioName}`);
+
+    dictationAudio.src = audioPath + '?t=' + Date.now(); 
+    dictationAudio.play().catch(e => {
+        console.log("ശബ്ദം പ്ലേ ചെയ്യാൻ കഴിഞ്ഞില്ല: ", e);
+        showToast("ശബ്ദം പ്ലേ ചെയ്യുന്നതിൽ തടസ്സം!");
+    }); 
+} 
+
+function replayCurrentAudio() { 
+    if(wordsDatabase[currentIdx]) { 
+        playWordVoice(wordsDatabase[currentIdx].audio); 
+    } 
+} 
+
+function updateTimerCircle(value) { 
+    const circle = document.getElementById('timerProgressCircle'); 
+    const circumference = 502;
+    const offset = circumference - (value / 60) * circumference; 
+    circle.style.strokeDashoffset = offset; 
+} 
+
+function revealWordAnswer(word) { 
+    document.getElementById('timerSection').style.display = 'none'; 
+    document.getElementById('examStatusText').innerText = "📢 സമയം അവസാനിച്ചു! ശരിയായ ഉത്തരം പരിശോധിക്കുക:"; 
+    document.getElementById('answerPanel').style.display = 'block'; 
+    
+    let malElem = document.getElementById('ansMal');
+    malElem.innerText = word.mal || ''; 
+    malElem.style.display = word.mal ? 'block' : 'none';
+    document.getElementById('ansArbi').innerText = word.arbiText || word.arbi || ''; 
+
+    // ഹാൻഡ്‌റൈറ്റിംഗ് ലഭ്യമാണെങ്കിൽ പേന ഉപയോഗിച്ച് എഴുതുന്നത് ആനിമേഷനായി കാണിക്കുന്നു; കഴിഞ്ഞ് 4 സെക്കൻഡ് ശേഷം അടുത്ത വാക്ക്
+    let goNext = (delay) => {
+        if(nextWordTimer) clearTimeout(nextWordTimer);
+        nextWordTimer = setTimeout(() => { currentIdx++; loadNextDictationWord(); }, delay);
+    };
+    if(word.writingPaths && word.writingPaths.length > 0) { 
+        animateHandwritingWithPen('ansHwSvg', word.writingPaths, () => goNext(4000));
+    } else {
+        // ഹാൻഡ്‌റൈറ്റിംഗ് ഇല്ലെങ്കിൽ 7 സെക്കൻഡ് ഉത്തരം കാണിച്ച ശേഷം അടുത്ത വാക്ക്
+        goNext(7000);
+    }
+} 
+
+// പേന (hand.png) ഉപയോഗിച്ച് വരച്ച വരകൾ ക്രമത്തിൽ എഴുതിക്കാണിക്കുന്നു
+function animateHandwritingWithPen(svgId, pathsData, onDone) {
+    let myToken = ++animToken;
+    let svg = document.getElementById(svgId);
+    svg.style.display = 'block';
+    svg.innerHTML = "";
+
+    let penImg = document.createElementNS("http://www.w3.org/2000/svg", "image");
+    penImg.setAttributeNS("http://www.w3.org/1999/xlink", "href", "hand.png");
+    penImg.setAttribute("width", "300");
+    penImg.setAttribute("height", "300");
+    penImg.setAttribute("style", "pointer-events: none;");
+    penImg.style.display = "none";
+
+    let pIdx = 0;
+    function drawNextPath() {
+        if(myToken !== animToken) return;   // അടുത്ത വാക്കിലേക്ക് പോയാൽ / നിർത്തിയാൽ ആനിമേഷൻ നിർത്തുന്നു
+        if(pIdx >= pathsData.length) {
+            penImg.style.display = "none";
+            if(onDone) onDone();
+            return;
+        }
+        let pts = pathsData[pIdx];
+        if(!pts || pts.length === 0) { pIdx++; drawNextPath(); return; }
+
+        let g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        let drawn = [];
+        for(let i = 0; i < 16; i++) {
+            let p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            p.setAttribute("transform", `translate(${(i-8)*0.4}, ${-(i-8)})`);
+            p.setAttribute("stroke", "#ef4444");
+            p.setAttribute("stroke-width", "3");
+            p.setAttribute("fill", "none");
+            p.setAttribute("stroke-linecap", "round");
+            g.appendChild(p);
+            drawn.push(p);
+        }
+        svg.appendChild(g);
+        svg.appendChild(penImg);
+        penImg.style.display = "block";
+
+        let ptIdx = 0;
+        let dStr = "";
+        function tracePoints() {
+            if(myToken !== animToken) return;
+            if(ptIdx >= pts.length) { pIdx++; setTimeout(drawNextPath, 150); return; }
+            let pt = pts[ptIdx];
+            dStr = (ptIdx === 0) ? `M ${pt.x} ${pt.y}` : dStr + ` L ${pt.x} ${pt.y}`;
+            drawn.forEach(p => p.setAttribute("d", dStr));
+            penImg.setAttribute("x", pt.x - 45);
+            penImg.setAttribute("y", pt.y - 70);
+            ptIdx++;
+            requestAnimationFrame(tracePoints);
+        }
+        tracePoints();
+    }
+    drawNextPath();
+}
+
+function exitExamMode() { 
+    animToken++;
+    if(countdownTimer) clearInterval(countdownTimer); 
+    if(audioLoopTimer) clearInterval(audioLoopTimer); 
+    if(nextWordTimer) clearTimeout(nextWordTimer);
+    dictationAudio.pause(); 
+    document.getElementById('setupBox').style.display = 'block'; 
+    document.getElementById('examBox').style.display = 'none'; 
+} 
+</script> 
+</body> 
+</html>
