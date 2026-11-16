@@ -92,6 +92,9 @@ audio { margin-top: 5px; display: none; width: 100%; }
     <div><label>വിഷയം (Subject):</label><input type="text" id="globalSubject" placeholder="ഫിഖ്ഹ്"></div>
 </div>
 <label>പാർട്ട് (Part):</label><input type="text" id="globalPart" placeholder="Part 1">
+<label style="color:#c0392b; font-weight:bold;">🔁 റിവിഷനിൽ എത്ര പാഠങ്ങൾ വരണം? (ഇപ്പോഴത്തെ പാഠം ഉൾപ്പെടെ, ഏറ്റവും പുതിയവ):</label>
+<input type="number" id="reviewLessons" min="1" max="100" value="10">
+<p style="font-size:11px; color:#555; margin:2px 0 0 0;">ഉദാഹരണത്തിന് 5 ആണെങ്കിൽ കുട്ടി 7-ാം പാഠത്തിലായാൽ 7, 6, 5, 4, 3 പാഠങ്ങൾ മാത്രം റിവിഷനിലും വാക്ക് ചലഞ്ചിലും വരും.</p>
 </div>
 </div> 
 
@@ -489,6 +492,7 @@ async function loadOldDataFromGitHub() {
                 document.getElementById('globalClass').value = oldBook.globalInfo.class || '';
                 document.getElementById('globalSubject').value = oldBook.globalInfo.subject || '';
                 document.getElementById('globalPart').value = oldBook.globalInfo.part || '';
+                document.getElementById('reviewLessons').value = oldBook.globalInfo.reviewLessons || 10;
                 lessonVideoMap = {};
                 (oldBook.globalInfo.lessonVideos || []).forEach(v => { if(v && v.lesson > 0 && v.link) lessonVideoMap[v.lesson] = v.link; });
                 fillLessonVideoLink();
@@ -1517,6 +1521,7 @@ async function publishToGitHubDirectly() {
         class: document.getElementById('globalClass').value.trim(), 
         subject: document.getElementById('globalSubject').value.trim(), 
         part: document.getElementById('globalPart').value.trim(), 
+        reviewLessons: Math.max(1, Math.min(100, parseInt(document.getElementById('reviewLessons').value) || 10)),
         lessonVideos: buildLessonVideos() 
     }; 
 
