@@ -756,9 +756,17 @@
   }
 
   // പുതിയ പാഠം ആദ്യം (പാഠം നമ്പർ കൂടിയത് മുന്നിൽ); ഒരു പാഠത്തിനുള്ളിൽ പേജുകൾ ആദ്യം മുതൽ അവസാനം വരെ ക്രമത്തിൽ
+  // റിവിഷനിൽ എത്ര പാഠങ്ങൾ വരണമെന്ന് admin പാനലിൽ സെറ്റ് ചെയ്യുന്നു (ഇല്ലെങ്കിൽ 10)
+  function getReviewLessonCount() {
+    let n = parseInt((bookData.globalInfo || {}).reviewLessons);
+    return (n >= 1) ? Math.min(n, 100) : 10;
+  }
   function getPagesNewestLessonFirst() {
     let curLesson = getCurrentLesson();
-    return (bookData.pages || []).filter(p => !p.hidden && (p.lesson || 1) <= curLesson)
+    let candidate = (bookData.pages || []).filter(p => !p.hidden && (p.lesson || 1) <= curLesson);
+    let lessonNums = Array.from(new Set(candidate.map(p => p.lesson || 1))).sort((a, b) => a - b);
+    let allowed = new Set(lessonNums.slice(-getReviewLessonCount()));   // ഏറ്റവും പുതിയ 10 പാഠങ്ങൾ
+    return candidate.filter(p => allowed.has(p.lesson || 1))
       .map((p, i) => ({ p: p, i: i }))
       .sort((x, y) => ((y.p.lesson || 1) - (x.p.lesson || 1)) || (x.i - y.i))
       .map(o => o.p);
