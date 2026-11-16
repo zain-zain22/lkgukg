@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>വേർഡ് ആപ്പ് - പ്രോ ലൈവ് റൂം</title>
+<title>സൗണ്ട് ബുക്ക് - ലൈവ് ക്ലാസ് പാനൽ</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 :root {
@@ -11,11 +11,9 @@
     --box-left-move: 0px;       
     --box-top-move: 2px;        
 }
-
-* { box-sizing: border-box; }
-body { font-family: 'Segoe UI', sans-serif; background: #eef2f3; margin: 0; padding: 10px; text-align: center; user-select: none; height: 100vh; overflow: hidden; }
-
-.container { 
+#viewProj * { box-sizing: border-box; }
+#viewProj { font-family: 'Segoe UI', sans-serif; background: #eef2f3; margin: 0; padding: 10px; text-align: center; user-select: none; height: 100vh; overflow: hidden; }
+#viewProj .container { 
     max-width: 98%; 
     margin: 0 auto; 
     background: white; 
@@ -29,19 +27,16 @@ body { font-family: 'Segoe UI', sans-serif; background: #eef2f3; margin: 0; padd
     justify-content: space-between; 
     position: relative; 
 }
-
-h2 { color: #2c3e50; margin: 0; font-size: 20px; }
-.header-area { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
-
-.four-lines-container {
+#viewProj h2 { color: #2c3e50; margin: 0; font-size: 20px; }
+#viewProj .header-area { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+#viewProj .four-lines-container {
     display: flex;
     justify-content: space-between;
     gap: 15px;
     margin: 8px 0;
     width: 100%;
 }
-
-.four-line-box {
+#viewProj .four-line-box {
     flex: 1;
     height: 160px; 
     background: #fff;
@@ -58,20 +53,19 @@ h2 { color: #2c3e50; margin: 0; font-size: 20px; }
     background-position: 0 40px, 0 70px, 0 100px, 0 130px;
     background-repeat: no-repeat;
 }
-
-.writing-board-section {
+#viewProj .writing-board-section {
     margin-top: 5px;
     border-top: 2px dashed #bdc3c7;
     padding-top: 5px;
 }
-.writing-title {
+#viewProj .writing-title {
     font-size: 14px;
     font-weight: bold;
     color: #e67e22;
     text-align: left;
     margin-bottom: 3px;
 }
-.full-width-board {
+#viewProj .full-width-board {
     width: 100%;
     height: 300px; 
     background: #fff;
@@ -80,8 +74,7 @@ h2 { color: #2c3e50; margin: 0; font-size: 20px; }
     position: relative;
     overflow: hidden;
 }
-
-.hw-canvas-svg {
+#viewProj .hw-canvas-svg {
     position: absolute;
     top: 0;
     left: 0;
@@ -90,8 +83,7 @@ h2 { color: #2c3e50; margin: 0; font-size: 20px; }
     z-index: 5;
     pointer-events: none;
 }
-
-.arbi-text {
+#viewProj .arbi-text {
     font-size: var(--arabic-font-size);
     font-family: 'Arabic Typesetting', 'Traditional Arabic', 'Amiri', sans-serif;
     color: #2c3e50;
@@ -106,13 +98,11 @@ h2 { color: #2c3e50; margin: 0; font-size: 20px; }
     white-space: nowrap;
     transform: translate(var(--box-left-move), var(--box-top-move)); 
 }
-
-.result-badge { position: absolute; top: 10px; right: 10px; font-size: 35px; z-index: 10; display: none; }
-.result-badge-tick { color: #2ecc71; }
-.timer-container { width: 100%; background: #ddd; height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: 5px; }
-.timer-bar { height: 100%; background: #e74c3c; width: 100%; transition: width 0.1s linear; }
-
-.alignment-controller {
+#viewProj .result-badge { position: absolute; top: 10px; right: 10px; font-size: 35px; z-index: 10; display: none; }
+#viewProj .result-badge-tick { color: #2ecc71; }
+#viewProj .timer-container { width: 100%; background: #ddd; height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: 5px; }
+#viewProj .timer-bar { height: 100%; background: #e74c3c; width: 100%; transition: width 0.1s linear; }
+#viewProj .alignment-controller {
     position: fixed;
     top: 15px;
     right: 15px;
@@ -126,7 +116,7 @@ h2 { color: #2c3e50; margin: 0; font-size: 20px; }
     text-align: left;
     font-size: 11px;
 }
-.drag-header {
+#viewProj .drag-header {
     padding: 3px;
     cursor: move;
     background-color: #2980b9;
@@ -137,11 +127,10 @@ h2 { color: #2c3e50; margin: 0; font-size: 20px; }
     margin-bottom: 6px;
     font-size: 12px;
 }
-.alignment-controller label { color: #bdc3c7; margin-top: 4px; font-size: 10px; display: flex; justify-content: space-between;}
-.alignment-controller input, .alignment-controller select { width: 100%; margin: 2px 0; }
-.alignment-controller select { background: #34495e; color: white; border: 1px solid #7f8c8d; padding: 3px; border-radius: 4px;}
-
-.btn-pause {
+#viewProj .alignment-controller label { color: #bdc3c7; margin-top: 4px; font-size: 10px; display: flex; justify-content: space-between;}
+#viewProj .alignment-controller input, #viewProj .alignment-controller select { width: 100%; margin: 2px 0; }
+#viewProj .alignment-controller select { background: #34495e; color: white; border: 1px solid #7f8c8d; padding: 3px; border-radius: 4px;}
+#viewProj .btn-pause {
     background: #e67e22;
     color: white;
     border: none;
@@ -157,34 +146,245 @@ h2 { color: #2c3e50; margin: 0; font-size: 20px; }
     align-items: center;
     gap: 5px;
 }
-.btn-pause.paused { background: #2ecc71; }
-
+#viewProj .btn-pause.paused { background: #2ecc71; }
 @media screen and (max-height: 500px) and (orientation: landscape) {
-    body { padding: 4px; }
-    .container { height: 97vh; padding: 6px; }
-    h2 { font-size: 16px; }
-    .header-area h3 { font-size: 13px; margin: 0; }
-    
-    .four-line-box { 
+#viewProj { padding: 4px; }
+#viewProj .container { height: 97vh; padding: 6px; }
+#viewProj h2 { font-size: 16px; }
+#viewProj .header-area h3 { font-size: 13px; margin: 0; }
+#viewProj .four-line-box { 
         height: 105px; 
         background-size: 100% 105px;
         background-position: 0 25px, 0 45px, 0 65px, 0 85px;
     }
-    .full-width-board { height: 105px; }
-    .writing-board-section { margin-top: 2px; padding-top: 2px; }
-    .writing-title { font-size: 12px; margin-bottom: 1px; }
+#viewProj .full-width-board { height: 105px; }
+#viewProj .writing-board-section { margin-top: 2px; padding-top: 2px; }
+#viewProj .writing-title { font-size: 12px; margin-bottom: 1px; }
+}
+#viewProj .overlay-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(44, 62, 80, 0.95); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; padding: 20px; }
+#viewProj .btn-restart { background: #3498db; color: white; border: none; padding: 12px 25px; font-size: 16px; border-radius: 5px; cursor: pointer; margin-top: 15px; box-shadow: 0 4px 0 #2980b9; }
+#viewProj .btn-restart:active { transform: translateY(4px); box-shadow: none; }
+#viewProj .btn-green { background: #2ecc71; color: white; border: none; padding: 10px 20px; font-size: 15px; border-radius: 5px; cursor: pointer; margin-top: 10px; width: 100%; }
+#viewProj select { padding: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px; width: 100%; margin-top: 4px; margin-bottom: 10px; }
+#viewDict *, #viewDict *::before, #viewDict *::after { box-sizing: border-box; }
+#viewDict { 
+    font-family: 'Segoe UI', system-ui, sans-serif; 
+    background: #111827; 
+    color: #f3f4f6; 
+    margin: 0; 
+    padding: 0; 
+    display: block; 
+    text-align: center; 
+}
+#viewDict .container { 
+    max-width: 800px; 
+    margin: 0 auto; 
+    padding: 20px; 
+    min-height: 100vh; 
+}
+#viewDict h1 { 
+    color: #38bdf8; 
+    font-size: 28px; 
+    margin-top: 10px; 
+    margin-bottom: 5px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5); 
+}
+#viewDict .lesson-info-badge {
+    background: #1f2937;
+    color: #f59e0b;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 15px;
+    border: 1px solid #374151;
+}
+#viewDict .setup-box { 
+    background: #1f2937; 
+    padding: 30px; 
+    border-radius: 12px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4); 
+    margin-top: 20px; 
+    text-align: center; 
+    border: 1px solid #374151; 
+}
+#viewDict .setup-box h3 { 
+    text-align: center; 
+    color: #f3f4f6; 
+    margin-top: 0; 
+}
+#viewDict .setup-box p { color: #9ca3af; font-size: 15px; margin: 0 0 18px 0; }
+#viewDict button { 
+    background: #0284c7; 
+    color: white; 
+    border: none; 
+    padding: 14px 20px; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    font-size: 16px; 
+    width: 100%; 
+    transition: background 0.2s; 
+}
+#viewDict button:hover { background: #0369a1; }
+#viewDict .switch-link { display: inline-block; margin-top: 18px; color: #38bdf8; font-size: 14px; text-decoration: none; }
+#viewDict .exam-card { 
+    background: #1f2937; 
+    border-radius: 16px; 
+    padding: 40px 20px; 
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5); 
+    margin-top: 10px; 
+    border: 1px solid #374151; 
+}
+#viewDict .word-badge { 
+    background: #374151; 
+    color: #38bdf8; 
+    padding: 6px 16px; 
+    border-radius: 20px; 
+    font-size: 18px; 
+    font-weight: bold; 
+    display: inline-block; 
+    margin-bottom: 20px; 
+}
+#viewDict .instruction { 
+    font-size: 24px; 
+    color: #e5e7eb; 
+    margin-bottom: 30px; 
+}
+#viewDict .timer-container { 
+    position: relative; 
+    width: 180px; 
+    height: 180px; 
+    margin: 0 auto 30px auto; 
+}
+#viewDict .timer-svg { 
+    transform: rotate(-90deg); 
+    width: 180px; 
+    height: 180px; 
+}
+#viewDict .timer-svg circle { 
+    stroke-width: 10px; 
+    fill: transparent; 
+}
+#viewDict .timer-bg { stroke: #374151; }
+#viewDict .timer-progress { 
+    stroke: #ef4444; 
+    stroke-dasharray: 502; 
+    stroke-dashoffset: 0; 
+    stroke-linecap: round; 
+    transition: stroke-dashoffset 1s linear; 
+}
+#viewDict .timer-text { 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    font-size: 55px; 
+    font-weight: bold; 
+    color: #ef4444; 
+}
+#viewDict .answer-panel { 
+    margin-top: 30px; 
+    border-top: 3px dashed #4b5563; 
+    padding-top: 30px; 
+    animation: zoomIn 0.4s ease-out; 
+}
+#viewDict .ans-label { 
+    font-size: 18px; 
+    color: #f59e0b; 
+    font-weight: bold; 
+    margin-bottom: 15px; 
+}
+#viewDict .ans-malayalam { 
+    font-size: 55px; 
+    font-weight: bold; 
+    color: #ffffff; 
+    margin-bottom: 15px; 
+}
+#viewDict .ans-arabic { 
+    font-size: 85px; 
+    font-weight: bold; 
+    color: #10b981; 
+    font-family: 'Amiri', 'Traditional Arabic', serif; 
+    direction: rtl; 
+    margin-bottom: 15px; 
+}
+#viewDict .hw-display-svg { 
+    width: 100%; 
+    max-width: 450px; 
+    height: 320px; 
+    border: 2px solid #4b5563; 
+    background: #111827; 
+    border-radius: 8px; 
+    margin: 15px auto; 
+    display: block; 
+}
+#viewDict .loading-overlay { 
+    display: none; 
+    position: fixed; 
+    top: 0; left: 0; width: 100%; height: 100%; 
+    background: rgba(17,24,39,0.9); 
+    color: white; 
+    justify-content: center; 
+    align-items: center; 
+    font-size: 22px; 
+    font-weight: bold; 
+    z-index: 9999; 
+}
+#viewDict .control-btns { 
+    display: flex; 
+    gap: 10px; 
+    max-width: 300px; 
+    margin: 20px auto 0 auto; 
+}
+#viewDict .btn-secondary { background: #4b5563; }
+#viewDict .btn-secondary:hover { background: #374151; }
+#viewDict .toast-msg {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ef4444;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    display: none;
+    z-index: 10000;
+}
+@keyframes zoomIn { 
+    from { opacity: 0; transform: scale(0.95); } 
+    to { opacity: 1; transform: scale(1); } 
 }
 
-.overlay-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(44, 62, 80, 0.95); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; padding: 20px; }
+/* ---- ടാബ് ബാർ & സംയോജിത ലേഔട്ട് ---- */
+html, body { margin: 0; padding: 0; background: #0f172a; }
+body { padding-top: 44px; }
+#tabBar { position: fixed; top: 0; left: 0; right: 0; height: 44px; background: #0f172a; display: flex; gap: 6px; padding: 5px; z-index: 20000; }
+.tab-btn { flex: 1; border: none; border-radius: 8px; background: #334155; color: #e2e8f0; font-weight: bold; font-size: 14px; cursor: pointer; padding: 0 8px; }
+.tab-btn.active { background: #2ecc71; color: #fff; }
+#viewProj { height: calc(100vh - 44px); }
+#viewProj .container { height: calc(100vh - 66px); }
+#viewProj .overlay-screen { padding-top: 60px; }
+#viewProj .alignment-controller { top: 54px; }
+#viewDict { min-height: calc(100vh - 44px); }
+#viewDict .container { min-height: calc(100vh - 44px); }
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    #viewProj { height: calc(100vh - 44px); }
+    #viewProj .container { height: calc(100vh - 54px); }
+}
 
-.btn-restart { background: #3498db; color: white; border: none; padding: 12px 25px; font-size: 16px; border-radius: 5px; cursor: pointer; margin-top: 15px; box-shadow: 0 4px 0 #2980b9; }
-.btn-restart:active { transform: translateY(4px); box-shadow: none; }
-.btn-green { background: #2ecc71; color: white; border: none; padding: 10px 20px; font-size: 15px; border-radius: 5px; cursor: pointer; margin-top: 10px; width: 100%; }
-select { padding: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px; width: 100%; margin-top: 4px; margin-bottom: 10px; }
 </style>
 </head>
 <body>
 
+<div id="tabBar">
+    <button class="tab-btn active" id="tabBtnProj" onclick="switchTab('proj')">🎯 വാക്ക് തിരഞ്ഞെടുക്കൽ</button>
+    <button class="tab-btn" id="tabBtnDict" onclick="switchTab('dict')">✍️ കേട്ടെഴുത്ത്</button>
+</div>
+
+<div id="viewProj">
 <div class="alignment-controller" id="liveTool" style="display:none;">
     <div class="drag-header" id="dragHandle"><i class="fa-solid fa-arrows-to-dot"></i> ഇവിടെ പിടിച്ചു നീക്കുക</div>
     
@@ -209,6 +409,7 @@ select { padding: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14
     <input type="range" id="sliderLeft" min="-80" max="80" value="0" oninput="adjustText()">
 
     <button id="pauseBtn" class="btn-pause" onclick="togglePause()"><i class="fa-solid fa-pause"></i> Pause</button>
+    <button class="btn-pause" style="background:#c0392b;" onclick="endProjectorEarly()"><i class="fa-solid fa-stop"></i> ഇവിടെ നിർത്തുക</button>
 </div>
 
 <div id="startOverlay" class="overlay-screen">
@@ -220,8 +421,10 @@ select { padding: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14
         <label style="color:white;">👤 കുട്ടിയുടെ പേര്:</label>
         <select id="studentSelect"></select>
 
+        <label style="color:white;">🔢 എത്ര വാക്കുകൾ വേണം? (ഏറ്റവും പുതിയവ)</label>
+        <input type="number" id="wordCountInput" min="1" max="200" value="25" style="width:100%; padding:8px; border-radius:4px; border:1px solid #ccc; font-size:14px; margin:4px 0 10px 0;">
+
         <button class="btn btn-green" onclick="startGame()">🚀 ക്ലാസ്സ് ആരംഭിക്കുക</button>
-        <a href="dictation_lkg.html" style="display:inline-block; margin-top:16px; color:#7fd1ff; font-size:14px;">➡️ കേട്ടെഴുത്ത് പാനലിലേക്ക് പോകുക</a>
     </div>
 </div>
 
@@ -255,18 +458,67 @@ select { padding: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14
         </div>
     </div>
 </div>
+</div>
+
+<div id="viewDict" style="display:none;">
+<div class="loading-overlay" id="loadingOverlay"> 
+    <div><i class="fa-solid fa-spinner fa-spin" style="margin-bottom:10px; font-size:40px; color:#38bdf8;"></i><br><span id="loadText">📦 വാക്കുകൾ ശേഖരിക്കുന്നു...</span></div> 
+</div> 
+
+<div class="container"> 
+    <h1>🎤 സൗണ്ട് ബുക്ക് - കേട്ടെഴുത്ത് റൂം</h1> 
+    <div class="lesson-info-badge" id="lessonInfoTag" style="display:none;">-</div>
+
+    <div class="setup-box" id="setupBox"> 
+        <h3>✍️ കേട്ടെഴുത്ത്</h3> 
+        <p>ഏറ്റവും പുതിയ വാക്കുകൾ ആദ്യം, ഓരോ വാക്കിനും 60 സെക്കൻഡ്.</p>
+        <label style="display:block; color:#9ca3af; margin-bottom:6px;">🔢 എത്ര വാക്കുകൾ വേണം? (ഏറ്റവും പുതിയവ)</label>
+        <input type="number" id="dictCount" min="1" max="200" value="25" style="width:120px; padding:10px; border-radius:6px; border:1px solid #4b5563; background:#374151; color:white; font-size:16px; text-align:center; margin-bottom:14px;">
+        <button onclick="fetchWordsFromAdmin()">🚀 വാക്കുകൾ ലോഡ് ചെയ്ത് തുടങ്ങുക</button>
+    </div> 
+
+    <div id="examBox" style="display: none;"> 
+        <div class="exam-card"> 
+            <div class="word-badge" id="wordIndexTitle">വാക്ക് 1 / 25</div> 
+            <div class="instruction" id="examStatusText">✍️ വോയ്സ് ശ്രദ്ധിച്ചു ബുക്കിലേക്ക് എഴുതുക...</div> 
+
+            <div class="timer-container" id="timerSection"> 
+                <svg class="timer-svg"> 
+                    <circle class="timer-bg" cx="90" cy="90" r="80"></circle> 
+                    <circle class="timer-progress" id="timerProgressCircle" cx="90" cy="90" r="80"></circle> 
+                </svg> 
+                <div class="timer-text" id="countdownText">60</div> 
+            </div> 
+
+            <div class="answer-panel" id="answerPanel" style="display: none;"> 
+                <div class="ans-label">📢 ശരിയായ ഉത്തരം:</div> 
+                <div class="ans-malayalam" id="ansMal"></div> 
+                <div class="ans-arabic" id="ansArbi"></div> 
+                <svg class="hw-display-svg" id="ansHwSvg" viewBox="0 0 700 700" preserveAspectRatio="xMidYMid meet" style="display:none;"></svg> 
+            </div> 
+        </div> 
+
+        <div class="control-btns"> 
+            <button class="btn-secondary" onclick="replayCurrentAudio()">🔊 വീണ്ടും കേൾക്കുക</button> 
+            <button class="btn-secondary" style="background:#ef4444;" onclick="exitExamMode()">🛑 നിർത്തുക</button> 
+        </div> 
+    </div> 
+</div> 
+
+<div id="toast" class="toast-msg"></div>
+</div>
 
 <script>
-// സൈറ്റ് github.io-ൽ ആണെങ്കിൽ അതേ സൈറ്റിലെ ഫയലുകൾ നേരിട്ട് ഉപയോഗിക്കുന്നു (റെപ്പോ പേര് മാറ്റേണ്ടതില്ല).
-// ഫയൽ ഫോണിൽ/കമ്പ്യൂട്ടറിൽ നേരിട്ട് തുറന്നാൽ മാത്രം താഴെയുള്ള GitHub raw ലിങ്ക് ഉപയോഗിക്കും.
+(function() {
+
+// ഡാറ്റ ഫയലുകൾ ഈ പേജ് ഇരിക്കുന്ന അതേ റെപ്പോയിലെ data ഫോൾഡറിൽ നിന്ന് എടുക്കുന്നു.
+// റെപ്പോ കോപ്പി ചെയ്താലും ഫയലിൽ ഒന്നും മാറ്റേണ്ടതില്ല (ലിങ്കോ റെപ്പോ പേരോ നൽകേണ്ട).
 const pathSegments = window.location.pathname.split('/').filter(Boolean);
-const ON_GH_PAGES = window.location.hostname.includes('github.io');
-const GH_USER = ON_GH_PAGES ? window.location.hostname.split('.')[0] : "zain-zain22"; 
-const GH_REPO = (ON_GH_PAGES && pathSegments.length > 0) ? pathSegments[0] : "lkgukg"; 
-const GH_BRANCH = "main";
-const BASE_URL = ON_GH_PAGES ? "" : `https://raw.githubusercontent.com/${GH_USER}/${GH_REPO}/${GH_BRANCH}/`;
+const GH_REPO = pathSegments.length > 0 ? pathSegments[0] : "local";   // ഏത് വാക്കുകൾ വന്നു എന്ന് ഓർത്തുവെക്കാൻ മാത്രം ഉപയോഗിക്കുന്നു
+const BASE_URL = "";
 
 const MAX_WORDS = 25;       // ഒരു തവണ ക്ലാസ്സിൽ വരുന്ന പരമാവധി വാക്കുകൾ (ഏറ്റവും പുതിയ 25)
+let allWordsData = [];      // ചേർത്ത ക്രമത്തിൽ എല്ലാ വാക്കുകളും
 let allWordsList = [];      // ഇപ്പോൾ ക്ലാസ്സിൽ ചോദിക്കാനുള്ള വാക്കുകൾ
 let poolWords = [];         // രണ്ടാമത്തെ (തെറ്റായ) ഓപ്ഷൻ എടുക്കാനുള്ള വാക്കുകൾ
 let bookWords = [];         // പാഠപുസ്തകത്തിൽ നിന്നുള്ള വാക്കുകൾ (പാഠം നമ്പർ സഹിതം)
@@ -359,7 +611,6 @@ function makeElementDraggable(elmnt) {
 async function fetchJsonSafe(path, fallback) {
     try {
         let res = await fetch(BASE_URL + path + '?t=' + Date.now());
-        if(!res.ok && BASE_URL !== "") res = await fetch(path + '?t=' + Date.now());
         if(res.ok) return await res.json();
     } catch(e) { }
     return fallback;
@@ -403,18 +654,14 @@ async function loadDataFromJSON() {
         });
 
         if(bookWords.length > 0) {
-            // ഏറ്റവും അവസാനം അപ്‌ലോഡ് ചെയ്ത 25 വാക്കുകൾ മാത്രം (പുതിയവ വരുമ്പോൾ ഏറ്റവും പഴയവ ഒഴിവാകും)
-            allWordsList = bookWords.slice(-MAX_WORDS).reverse();   // ഏറ്റവും പുതിയ വാക്ക് ആദ്യം
-            poolWords = allWordsList.slice();
+            allWordsData = bookWords;
         } else {
             // പാഠപുസ്തക വാക്കുകൾ ഇല്ലെങ്കിൽ പഴയ വേർഡ് ആപ്പ് ഡാറ്റ (data.json) ഉപയോഗിക്കുന്നു
             let rawData = await fetchJsonSafe('data/data.json', {});
-            if(rawData.words && Array.isArray(rawData.words)) {
-                let unhiddenWords = rawData.words.filter(w => !w.hidden && !w.isHidden);
-                allWordsList = unhiddenWords.slice(-MAX_WORDS).reverse();
-                poolWords = allWordsList.slice();
-            }
+            if(rawData.words && Array.isArray(rawData.words)) allWordsData = rawData.words.filter(w => !w.hidden && !w.isHidden);
         }
+        poolWords = allWordsData.slice();
+        try { let sc = localStorage.getItem('wordCount:' + GH_REPO); if(sc) document.getElementById('wordCountInput').value = sc; } catch(e) { }
     } catch (e) {
         console.error(e);
         alert("ഡാറ്റ ലോഡ് ചെയ്യാൻ കഴിഞ്ഞില്ല! ഇന്റർനെറ്റ് കണക്ഷൻ പരിശോധിക്കുക.");
@@ -456,6 +703,12 @@ function startGame() {
     unlockAudio(); 
     let student = document.getElementById('studentSelect').value;
     if(!student) return alert("പേര് തിരഞ്ഞെടുക്കുക!");
+    // എത്ര വാക്കുകൾ വേണമെന്ന് ടൈപ്പ് ചെയ്ത സംഖ്യ: ഏറ്റവും അവസാനം ചേർത്തവ, പുതിയത് ആദ്യം
+    let wanted = parseInt(document.getElementById('wordCountInput').value) || MAX_WORDS;
+    wanted = Math.max(1, Math.min(wanted, allWordsData.length || 1));
+    document.getElementById('wordCountInput').value = wanted;
+    try { localStorage.setItem('wordCount:' + GH_REPO, String(wanted)); } catch(e) { }
+    allWordsList = allWordsData.slice(-wanted).reverse();
     if(allWordsList.length < 1) return alert("വാക്കുകൾ ലഭ്യമല്ല! admin പാനലിൽ പാഠപുസ്തകത്തിൽ വാക്കുകൾ വരച്ച് ടെക്സ്റ്റും ശബ്ദവും നൽകി പബ്ലിഷ് ചെയ്യുക.");
     currentQuestionIndex = 0;
     
@@ -475,6 +728,8 @@ function generateQuestion() {
         document.getElementById('gameContent').innerHTML = `
             <div style="margin-top: 18vh;">
                 <h2 style="color:#2ecc71; font-size:30px; margin-bottom:15px;">🎉 എല്ലാ വാക്കുകളും കഴിഞ്ഞു! 🎉</h2>
+                <p style="color:#555; font-size:16px; margin:0 0 5px 0;">ഇനി ഈ വാക്കുകൾ കേട്ടെഴുത്ത് ചെയ്യിക്കാം.</p>
+                <button class="btn-restart" style="background:#2ecc71; box-shadow:0 4px 0 #27ae60;" onclick="switchTab('dict')"><i class="fa-solid fa-pen-to-square"></i> ഈ വാക്കുകൾ കേട്ടെഴുത്ത് ചെയ്യുക</button><br>
                 <button class="btn-restart" onclick="location.reload();"><i class="fa-solid fa-rotate-right"></i> വീണ്ടും കളിക്കുക</button>
             </div>
         `;
@@ -560,6 +815,14 @@ function startTimer() {
             }
         }
     }, 100);
+}
+
+// ഇഷ്ടമുള്ളപ്പോൾ നിർത്താം: അവസാന സ്ക്രീനിൽ നിന്ന് കേട്ടെഴുത്തിലേക്ക് പോകാം
+function endProjectorEarly() {
+    clearInterval(timerInterval);
+    if(currentAudio) { currentAudio.loop = false; currentAudio.pause(); }
+    currentQuestionIndex = allWordsList.length;
+    generateQuestion();
 }
 
 function togglePause() {
@@ -676,6 +939,310 @@ function animateHandwritingWithPen(svgId, pathsData) {
     }
     drawNextPath();
 }
+
+let autoPaused = false;
+window.PROJ = {
+    isRunning: function() { return !!document.getElementById('pauseBtn') && document.getElementById('gameContent').style.display !== 'none' && !!currentAudio; },
+    pauseForTab: function() { if(this.isRunning() && !isPaused) { togglePause(); autoPaused = true; } },
+    resumeFromTab: function() { if(autoPaused && isPaused && document.getElementById('pauseBtn')) togglePause(); autoPaused = false; }
+};
+window.updateStudentDropdown = updateStudentDropdown;
+window.startGame = startGame;
+window.togglePause = togglePause;
+window.adjustText = adjustText;
+window.endProjectorEarly = endProjectorEarly;
+
+})();
+</script>
+<script>
+(function() {
+ 
+// ഡാറ്റ ഫയലുകൾ ഈ പേജ് ഇരിക്കുന്ന അതേ റെപ്പോയിലെ data ഫോൾഡറിൽ നിന്ന് എടുക്കുന്നു.
+// റെപ്പോ കോപ്പി ചെയ്താലും ഫയലിൽ ഒന്നും മാറ്റേണ്ടതില്ല (ലിങ്കോ റെപ്പോ പേരോ നൽകേണ്ട).
+const pathSegments = window.location.pathname.split('/').filter(Boolean);
+const GH_REPO = pathSegments.length > 0 ? pathSegments[0] : "local";   // ഏത് വാക്കുകൾ വന്നു എന്ന് ഓർത്തുവെക്കാൻ മാത്രം ഉപയോഗിക്കുന്നു
+const BASE_URL = "";
+const MAX_WORDS = 25;   // ഏറ്റവും പുതിയ 25 വാക്കുകൾ
+
+let wordsDatabase = []; 
+let currentIdx = 0; 
+let countdownValue = 60; 
+let countdownTimer = null; 
+let audioLoopTimer = null; 
+let nextWordTimer = null;
+let dictPaused = false;
+let animToken = 0;   // ഓരോ ആനിമേഷനും തിരിച്ചറിയാൻ (നിർത്തുമ്പോൾ/അടുത്ത വാക്കിൽ പഴയത് നിർത്താൻ)
+let dictationAudio = new Audio(); 
+
+// തുടങ്ങുന്ന സ്ക്രീനിൽ: കഴിഞ്ഞ തവണ ടൈപ്പ് ചെയ്ത സംഖ്യ വീണ്ടും കാണിക്കുന്നു
+function refreshStartButtons() {
+    try { let sc = localStorage.getItem('dictCount:' + GH_REPO); if(sc) document.getElementById('dictCount').value = sc; } catch(e) { }
+}
+window.addEventListener('DOMContentLoaded', refreshStartButtons);
+
+function showToast(msg) {
+    let t = document.getElementById("toast");
+    t.textContent = msg;
+    t.style.display = "block";
+    setTimeout(() => { t.style.display = "none"; }, 3000);
+}
+
+async function fetchJsonSafe(path, fallback) {
+    try {
+        let res = await fetch(BASE_URL + path + '?t=' + Date.now());
+        if(res.ok) return await res.json();
+    } catch(e) { }
+    return fallback;
+}
+
+async function fetchWordsFromAdmin() { 
+    document.getElementById('loadingOverlay').style.display = 'flex'; 
+    try { 
+        let book = await fetchJsonSafe('data/data_book.json', {});
+
+        // പാഠപുസ്തകത്തിൽ ടെക്സ്റ്റും ശബ്ദവും നൽകിയ വാക്കുകൾ (ചേർത്ത ക്രമത്തിൽ)
+        let words = [];
+        (book.pages || []).filter(p => !p.hidden).forEach(p => {
+            (p.zones || []).forEach(z => {
+                let t = (z.text || '').trim();
+                if(t && z.audioSrc) words.push({ arbiText: t, audio: z.audioSrc, writingPaths: z.writingPaths || null, mal: '' });
+            });
+        });
+
+        // പാഠപുസ്തക വാക്കുകൾ ഇല്ലെങ്കിൽ പഴയ വേർഡ് ആപ്പ് ഡാറ്റ ഉപയോഗിക്കുന്നു
+        if(words.length === 0) {
+            let old = await fetchJsonSafe('data/data.json', {});
+            if(Array.isArray(old.words)) words = old.words.filter(w => !w.hidden && !w.isHidden);
+        }
+
+        let info = book.globalInfo || {};
+        let tagParts = [info.class, info.subject, info.part].filter(x => x && String(x).trim());
+        let tagElem = document.getElementById('lessonInfoTag');
+        if(tagParts.length > 0) { tagElem.innerText = '📚 ' + tagParts.join(' | '); tagElem.style.display = 'inline-block'; }
+
+        // ഏറ്റവും അവസാനം ചേർത്ത 25 വാക്കുകൾ, പുതിയത് ആദ്യം
+        let wanted = parseInt(document.getElementById('dictCount').value) || MAX_WORDS;
+        wanted = Math.max(1, Math.min(wanted, words.length || 1));
+        document.getElementById('dictCount').value = wanted;
+        try { localStorage.setItem('dictCount:' + GH_REPO, String(wanted)); } catch(e) { }
+        wordsDatabase = words.slice(-wanted).reverse();
+
+        document.getElementById('loadingOverlay').style.display = 'none'; 
+        if(wordsDatabase.length === 0) { 
+            alert("വാക്കുകൾ കണ്ടെത്തിയില്ല! admin പാനലിൽ പാഠപുസ്തകത്തിൽ വാക്കുകൾ വരച്ച് ടെക്സ്റ്റും ശബ്ദവും നൽകി പബ്ലിഷ് ചെയ്യുക."); 
+            return; 
+        } 
+
+        document.getElementById('setupBox').style.display = 'none'; 
+        document.getElementById('examBox').style.display = 'block'; 
+        currentIdx = 0; 
+        loadNextDictationWord(); 
+    } catch(err) { 
+        alert("ഡാറ്റ ലോഡ് ചെയ്യുന്നതിൽ പരാജയം: " + err.message); 
+        document.getElementById('loadingOverlay').style.display = 'none'; 
+    } 
+} 
+
+function loadNextDictationWord() { 
+    if(currentIdx >= wordsDatabase.length) { 
+        alert("🎉 കേട്ടെഴുത്ത് വിജയകരമായി അവസാനിച്ചു!"); 
+        exitExamMode(); 
+        return; 
+    } 
+
+    animToken++;
+    let currentWord = wordsDatabase[currentIdx]; 
+    document.getElementById('wordIndexTitle').innerText = `വാക്ക് ${currentIdx + 1} / ${wordsDatabase.length}`; 
+    document.getElementById('examStatusText').innerText = "✍️ വോയ്സ് ശ്രദ്ധിച്ചു ബുക്കിലേക്ക് എഴുതുക..."; 
+    document.getElementById('answerPanel').style.display = 'none'; 
+    document.getElementById('ansHwSvg').style.display = 'none'; 
+    document.getElementById('timerSection').style.display = 'block'; 
+
+    countdownValue = 60; 
+    document.getElementById('countdownText').innerText = countdownValue; 
+    updateTimerCircle(60); 
+
+    playWordVoice(currentWord.audio); 
+
+    // 1 മിനിറ്റ് തീരുന്നത് വരെ ഓരോ 4.5 സെക്കൻഡിലും ഒരേ വാക്ക് ആവർത്തിച്ചു പ്ലേ ചെയ്യുന്നു
+    if(audioLoopTimer) clearInterval(audioLoopTimer); 
+    audioLoopTimer = setInterval(() => { 
+        if(dictPaused) return;
+        playWordVoice(currentWord.audio); 
+    }, 4500); 
+
+    if(countdownTimer) clearInterval(countdownTimer); 
+    countdownTimer = setInterval(() => { 
+        if(dictPaused) return;
+        countdownValue--; 
+        document.getElementById('countdownText').innerText = countdownValue; 
+        updateTimerCircle(countdownValue); 
+
+        if(countdownValue <= 0) { 
+            clearInterval(countdownTimer); 
+            clearInterval(audioLoopTimer); 
+            revealWordAnswer(currentWord); 
+        } 
+    }, 1000); 
+} 
+
+function playWordVoice(audioName) { 
+    if(!audioName) {
+        showToast("ഈ വാക്കിന് ശബ്ദം നൽകിയിട്ടില്ല.");
+        return; 
+    }
+    let cleanAudioName = audioName.trim();
+    let audioPath = cleanAudioName.startsWith('http') ? cleanAudioName
+        : BASE_URL + (cleanAudioName.startsWith('data/') ? cleanAudioName : `data/${cleanAudioName}`);
+
+    dictationAudio.src = audioPath + '?t=' + Date.now(); 
+    dictationAudio.play().catch(e => {
+        console.log("ശബ്ദം പ്ലേ ചെയ്യാൻ കഴിഞ്ഞില്ല: ", e);
+        showToast("ശബ്ദം പ്ലേ ചെയ്യുന്നതിൽ തടസ്സം!");
+    }); 
+} 
+
+function replayCurrentAudio() { 
+    if(wordsDatabase[currentIdx]) { 
+        playWordVoice(wordsDatabase[currentIdx].audio); 
+    } 
+} 
+
+function updateTimerCircle(value) { 
+    const circle = document.getElementById('timerProgressCircle'); 
+    const circumference = 502;
+    const offset = circumference - (value / 60) * circumference; 
+    circle.style.strokeDashoffset = offset; 
+} 
+
+function revealWordAnswer(word) { 
+    document.getElementById('timerSection').style.display = 'none'; 
+    document.getElementById('examStatusText').innerText = "📢 സമയം അവസാനിച്ചു! ശരിയായ ഉത്തരം പരിശോധിക്കുക:"; 
+    document.getElementById('answerPanel').style.display = 'block'; 
+    
+    let malElem = document.getElementById('ansMal');
+    malElem.innerText = word.mal || ''; 
+    malElem.style.display = word.mal ? 'block' : 'none';
+    document.getElementById('ansArbi').innerText = word.arbiText || word.arbi || ''; 
+
+    // ഹാൻഡ്‌റൈറ്റിംഗ് ലഭ്യമാണെങ്കിൽ പേന ഉപയോഗിച്ച് എഴുതുന്നത് ആനിമേഷനായി കാണിക്കുന്നു; കഴിഞ്ഞ് 4 സെക്കൻഡ് ശേഷം അടുത്ത വാക്ക്
+    let goNext = (delay) => {
+        if(nextWordTimer) clearTimeout(nextWordTimer);
+        nextWordTimer = setTimeout(function again() { if(dictPaused) { nextWordTimer = setTimeout(again, 400); return; } currentIdx++; loadNextDictationWord(); }, delay);
+    };
+    if(word.writingPaths && word.writingPaths.length > 0) { 
+        animateHandwritingWithPen('ansHwSvg', word.writingPaths, () => goNext(4000));
+    } else {
+        // ഹാൻഡ്‌റൈറ്റിംഗ് ഇല്ലെങ്കിൽ 7 സെക്കൻഡ് ഉത്തരം കാണിച്ച ശേഷം അടുത്ത വാക്ക്
+        goNext(7000);
+    }
+} 
+
+// പേന (hand.png) ഉപയോഗിച്ച് വരച്ച വരകൾ ക്രമത്തിൽ എഴുതിക്കാണിക്കുന്നു
+function animateHandwritingWithPen(svgId, pathsData, onDone) {
+    let myToken = ++animToken;
+    let svg = document.getElementById(svgId);
+    svg.style.display = 'block';
+    svg.innerHTML = "";
+
+    let penImg = document.createElementNS("http://www.w3.org/2000/svg", "image");
+    penImg.setAttributeNS("http://www.w3.org/1999/xlink", "href", "hand.png");
+    penImg.setAttribute("width", "300");
+    penImg.setAttribute("height", "300");
+    penImg.setAttribute("style", "pointer-events: none;");
+    penImg.style.display = "none";
+
+    let pIdx = 0;
+    function drawNextPath() {
+        if(myToken !== animToken) return;   // അടുത്ത വാക്കിലേക്ക് പോയാൽ / നിർത്തിയാൽ ആനിമേഷൻ നിർത്തുന്നു
+        if(dictPaused) { setTimeout(drawNextPath, 300); return; }
+        if(pIdx >= pathsData.length) {
+            penImg.style.display = "none";
+            if(onDone) onDone();
+            return;
+        }
+        let pts = pathsData[pIdx];
+        if(!pts || pts.length === 0) { pIdx++; drawNextPath(); return; }
+
+        let g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        let drawn = [];
+        for(let i = 0; i < 16; i++) {
+            let p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            p.setAttribute("transform", `translate(${(i-8)*0.4}, ${-(i-8)})`);
+            p.setAttribute("stroke", "#ef4444");
+            p.setAttribute("stroke-width", "3");
+            p.setAttribute("fill", "none");
+            p.setAttribute("stroke-linecap", "round");
+            g.appendChild(p);
+            drawn.push(p);
+        }
+        svg.appendChild(g);
+        svg.appendChild(penImg);
+        penImg.style.display = "block";
+
+        let ptIdx = 0;
+        let dStr = "";
+        function tracePoints() {
+            if(myToken !== animToken) return;
+            if(dictPaused) { setTimeout(tracePoints, 300); return; }
+            if(ptIdx >= pts.length) { pIdx++; setTimeout(drawNextPath, 150); return; }
+            let pt = pts[ptIdx];
+            dStr = (ptIdx === 0) ? `M ${pt.x} ${pt.y}` : dStr + ` L ${pt.x} ${pt.y}`;
+            drawn.forEach(p => p.setAttribute("d", dStr));
+            penImg.setAttribute("x", pt.x - 45);
+            penImg.setAttribute("y", pt.y - 70);
+            ptIdx++;
+            requestAnimationFrame(tracePoints);
+        }
+        tracePoints();
+    }
+    drawNextPath();
+}
+
+function exitExamMode() { 
+    animToken++;
+    dictPaused = false;
+    if(countdownTimer) clearInterval(countdownTimer); 
+    if(audioLoopTimer) clearInterval(audioLoopTimer); 
+    if(nextWordTimer) clearTimeout(nextWordTimer);
+    dictationAudio.pause(); 
+    document.getElementById('setupBox').style.display = 'block'; 
+    document.getElementById('examBox').style.display = 'none'; 
+} 
+
+window.DICT = {
+    isRunning: function() { return document.getElementById('examBox').style.display === 'block'; },
+    pauseForTab: function() { if(this.isRunning() && !dictPaused) { dictPaused = true; dictationAudio.pause(); } },
+    resumeFromTab: function() {
+        if(dictPaused) {
+            dictPaused = false;
+            if(this.isRunning() && document.getElementById('answerPanel').style.display === 'none') replayCurrentAudio();
+        }
+    },
+    refresh: function() { refreshStartButtons(); }
+};
+window.fetchWordsFromAdmin = fetchWordsFromAdmin;
+window.replayCurrentAudio = replayCurrentAudio;
+window.exitExamMode = exitExamMode;
+
+})();
+</script>
+<script>
+
+// ---- ടാബുകൾ മാറുന്നത് ----
+let currentTab = 'proj';
+function switchTab(name) {
+    if(name === currentTab) return;
+    // വിട്ടുപോകുന്ന ടാബിലെ ശബ്ദവും ടൈമറും താൽക്കാലികമായി നിർത്തുന്നു
+    if(currentTab === 'proj') window.PROJ.pauseForTab(); else window.DICT.pauseForTab();
+    document.getElementById('viewProj').style.display = (name === 'proj') ? 'block' : 'none';
+    document.getElementById('viewDict').style.display = (name === 'dict') ? 'block' : 'none';
+    document.getElementById('tabBtnProj').classList.toggle('active', name === 'proj');
+    document.getElementById('tabBtnDict').classList.toggle('active', name === 'dict');
+    currentTab = name;
+    if(name === 'proj') window.PROJ.resumeFromTab(); else { window.DICT.resumeFromTab(); window.DICT.refresh(); }
+}
+
 </script>
 </body>
 </html>
