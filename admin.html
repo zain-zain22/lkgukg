@@ -340,7 +340,7 @@ audio { margin-top: 5px; display: none; width: 100%; }
 // റെപ്പോയുടെ പേര് പേജിൻ്റെ വിലാസത്തിൽ നിന്ന് തനിയെ എടുക്കുന്നു (കോപ്പി ചെയ്ത റെപ്പോയിലും ശരിയായി പ്രവർത്തിക്കാൻ)
 const IS_GH_PAGES = location.hostname.endsWith('.github.io') && location.pathname.split('/')[1];
 const GH_USER = IS_GH_PAGES ? location.hostname.split('.')[0] : "zain-zain22";
-const GH_REPO = IS_GH_PAGES ? location.pathname.split('/')[1] : "lkgukg"; 
+const GH_REPO = IS_GH_PAGES ? location.pathname.split('/')[1] : "tamlets1"; 
 const GH_BRANCH = "main"; 
 
 let masterSchoolData = {}; 
@@ -783,6 +783,7 @@ function renderZoneEditList() {
         let st = document.createElement('div');
         st.style.cssText = 'font-size:11px; color:#27ae60; width:100%;';
         let hwCount = zone.writingPaths ? zone.writingPaths.length : 0;
+        let lineCount = zone.linePaths ? zone.linePaths.length : 0;
         st.innerText = (audioSrc ? '🔊 ശബ്ദമുണ്ട്' : '🎙️ ശബ്ദമില്ല') + '  |  ' + (hwCount ? `✍️ ഹാൻഡ്‌റൈറ്റിംഗ് (${hwCount} വര)` : '✍️ ഹാൻഡ്‌റൈറ്റിംഗ് ഇല്ല') + '  |  ' + (lineCount ? '🖍️ പേജിൽ വരയുണ്ട്' : '🖍️ പേജിൽ വരയില്ല');
         d.appendChild(st);
 
@@ -793,7 +794,6 @@ function renderZoneEditList() {
             d.appendChild(au);
         }
 
-        let lineCount = zone.linePaths ? zone.linePaths.length : 0;
         let lineBtn = document.createElement('button');
         lineBtn.type = 'button';
         lineBtn.style.cssText = 'padding:4px 8px; font-size:11px; width:auto; margin:0; background:#27ae60;';
